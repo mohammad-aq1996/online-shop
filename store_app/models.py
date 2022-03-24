@@ -6,6 +6,7 @@ from django.utils import timezone
 
 class Product(models.Model):
     title = models.CharField(max_length=20)
+    image = models.ImageField(upload_to='store_app')
     brand = models.ForeignKey(to='Brand', on_delete=models.CASCADE, related_name='brands')
     category = models.ForeignKey(to='Category', on_delete=models.CASCADE, related_name='categories')
     explanation = models.TextField()
