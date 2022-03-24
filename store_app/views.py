@@ -17,6 +17,13 @@ class ProductListView(ListView):
     template_name = 'store_app/product-list.html'
 
 
+class SearchView(ProductListView):
+    def get_queryset(self):
+        search = self.request.GET.get('search')
+        products = Product.objects.filter(title__icontains=search)
+        return products
+
+
 
 
 

@@ -54,6 +54,10 @@
                     {% endif %}
 
                 </ul>
+          <form method="get" action="{% url 'store_app:search-view' %}" class="d-flex">
+            <input class="form-control me-2" type="text" name="search" placeholder="Search">
+            <button class="btn btn-primary" type="submit">Search</button>
+          </form>
           </div>
     </nav>
     <!-- end navbar -->
