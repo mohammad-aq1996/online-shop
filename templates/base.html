@@ -28,28 +28,33 @@
 
     <!-- Navbar -->
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-      <div class="container-fluid">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link active" href="#">Active</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-            {% if user.is_authenticated %}
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'store_app:logout-view' %}">Logout</a>
-          </li>
-            {% else %}
-            <li class="nav-item">
-            <a class="nav-link" href="{% url 'store_app:login-view' %}">Login</a>
-            </li>
-            {% endif %}
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#">Disabled</a>
-          </li>
-        </ul>
-      </div>
+          <div class="container-fluid">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
+                    {% if user.is_authenticated %}
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'store_app:logout-view' %}">Logout</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="#">Welcome, {{ user.username }}</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'store_app:register-view' %}">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'store_app:login-view' %}">Login</a>
+                    </li>
+                    {% endif %}
+
+                </ul>
+          </div>
     </nav>
     <!-- end navbar -->
 
