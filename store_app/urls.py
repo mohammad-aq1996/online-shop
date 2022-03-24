@@ -10,5 +10,6 @@ urlpatterns = [
     path('login/', auth_view.LoginView.as_view(template_name='login.html'), name='login-view'),
     path('logout/', auth_view.LogoutView.as_view(), name='logout-view'),
     path('register/', views.RegisterView.as_view(), name='register-view'),
+    path('products/', views.ProductListView.as_view(), name='product-view'),
 
 ]
