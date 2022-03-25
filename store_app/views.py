@@ -20,6 +20,21 @@ class ProductListView(ListView):
     paginate_by = 8
 
 
+class ProductListNewestView(ProductListView):
+    def get_queryset(self):
+        return self.model.objects.all().order_by('-created_at')
+
+
+class ProductListCheapestView(ProductListView):
+    def get_queryset(self):
+        return self.model.objects.all().order_by('price')
+
+
+class ProductListExpensiveView(ProductListView):
+    def get_queryset(self):
+        return self.model.objects.all().order_by('-price')
+
+
 class SearchView(ProductListView):
     paginate_by = 0
 

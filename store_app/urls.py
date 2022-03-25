@@ -20,5 +20,8 @@ urlpatterns = [
     path('bank/', TemplateView.as_view(template_name='store_app/bank.html'), name='bank'),
     path('uns/', TemplateView.as_view(template_name='store_app/unsuccess-result.html'), name='unsuccess'),
     path('success/', views.result_success_view, name='success'),
+    path('cheapest/', views.ProductListCheapestView.as_view(), name='cheapest-view'),
+    path('expensive/', views.ProductListExpensiveView.as_view(), name='expensive-view'),
+    path('newest/', views.ProductListNewestView.as_view(), name='newest-view'),
 
 ]
