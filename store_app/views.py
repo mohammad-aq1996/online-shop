@@ -17,7 +17,7 @@ class ProductListView(ListView):
     model = Product
     context_object_name = 'products'
     template_name = 'store_app/product-list.html'
-    paginate_by = 3
+    paginate_by = 8
 
 
 class SearchView(ProductListView):
