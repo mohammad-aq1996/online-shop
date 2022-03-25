@@ -88,7 +88,10 @@ def factor_view(req):
     return render(req, 'store_app/factor.html', {'purchases': purchases, 'total_price': total})
 
 
-
+def result_success_view(req):
+    purchases = ShoppingBasket.objects.filter(buyyer=req.user)
+    purchases.delete()
+    return render(req, 'store_app/success-result.html')
 
 
 

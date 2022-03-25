@@ -17,5 +17,8 @@ urlpatterns = [
     path('m/<int:pk>/', views.shopping_basket_minus, name='m-view'),
     path('p/<int:pk>/', views.shopping_basket_plus, name='p-view'),
     path('factor/', views.factor_view, name='factor'),
+    path('bank/', TemplateView.as_view(template_name='store_app/bank.html'), name='bank'),
+    path('uns/', TemplateView.as_view(template_name='store_app/unsuccess-result.html'), name='unsuccess'),
+    path('success/', views.result_success_view, name='success'),
 
 ]
