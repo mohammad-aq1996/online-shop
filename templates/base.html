@@ -36,6 +36,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#">Link</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'store_app:product-view' %}">Products</a>
+                    </li>
                     {% if user.is_authenticated %}
 
                     <li class="nav-item">
@@ -45,6 +48,7 @@
                         <a class="nav-link disabled" href="#">Welcome, {{ user.username }}</a>
                     </li>
                     {% else %}
+
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'store_app:register-view' %}">Register</a>
                     </li>
@@ -52,6 +56,7 @@
                         <a class="nav-link" href="{% url 'store_app:login-view' %}">Login</a>
                     </li>
                     {% endif %}
+
 
                 </ul>
           <form method="get" action="{% url 'store_app:search-view' %}" class="d-flex">
