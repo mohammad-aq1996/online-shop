@@ -3,6 +3,7 @@
 
 
 {% block content %}
+{% if purchases %}
 {% for purchase in purchases %}
     <div class="card">
 
@@ -35,4 +36,7 @@
     <div class="container text-center" style="margin: 20px">
         <a style="padding-left: 30px; padding-right: 30px;" class="btn btn-primary" href="{% url 'store_app:factor' %}">Finish</a>
     </div>
+{% else %}
+    <h1 style="text-align: center; margin-bottom: 400px">Your shopping basket is empty.</h1>
+{% endif %}
 {% endblock %}
