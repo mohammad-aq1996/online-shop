@@ -2,7 +2,8 @@ from django.shortcuts import render
 from .forms import UserCreateForm
 from django.views.generic import CreateView, ListView, DetailView
 from django.urls import reverse_lazy
-from .models import Product
+from .models import Product, ShoppingBasket
+from django.shortcuts import redirect
 
 
 class RegisterView(CreateView):
@@ -28,6 +29,20 @@ class ProductDetailView(DetailView):
     model = Product
     context_object_name = 'product'
     template_name = 'store_app/products-detail.html'
+
+    def post(self, request, **kwargs):
+        product = Product.objects.get(id=self.kwargs['pk'])
+        number = request.POST.get('count')
+        product.buy(number)
+        product.save()
+        if ShoppingBasket.objects.filter(product=product).exists():
+            t = ShoppingBasket.objects.get(product=product)
+            t.count = t.count + int(number)
+            t.save()
+        else:
+            ShoppingBasket.objects.create(product=product, buyyer=request.user, count=number)
+
+        return redirect('store_app:product-view')
 
 
 
