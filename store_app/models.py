@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
 from django.utils import timezone
+from ckeditor.fields import RichTextField
 
 
 class Product(models.Model):
@@ -9,7 +10,7 @@ class Product(models.Model):
     image = models.ImageField(upload_to='store_app')
     brand = models.ForeignKey(to='Brand', on_delete=models.CASCADE, related_name='brands')
     category = models.ForeignKey(to='Category', on_delete=models.CASCADE, related_name='categories')
-    explanation = models.TextField()
+    explanation = RichTextField()
     price = models.IntegerField()
     count = models.SmallIntegerField()
     available = models.BooleanField(default=False)
