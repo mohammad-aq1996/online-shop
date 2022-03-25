@@ -17,9 +17,12 @@ class ProductListView(ListView):
     model = Product
     context_object_name = 'products'
     template_name = 'store_app/product-list.html'
+    paginate_by = 3
 
 
 class SearchView(ProductListView):
+    paginate_by = 0
+
     def get_queryset(self):
         search = self.request.GET.get('search')
         products = Product.objects.filter(title__icontains=search)
