@@ -61,5 +61,10 @@ class ShoppingBasket(models.Model):
     product = models.ForeignKey(Product, models.CASCADE, related_name='products')
     count = models.PositiveSmallIntegerField(default=1)
 
+    class Meta:
+        ordering = ['buyyer']
+
     def __str__(self):
         return self.product.title
+
+
