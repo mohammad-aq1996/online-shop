@@ -80,6 +80,13 @@ def shopping_basket_plus(req, pk):
     return redirect('store_app:purchases-view')
 
 
+def factor_view(req):
+    purchases = ShoppingBasket.objects.filter(buyyer=req.user)
+    total = 0
+    for purchase in purchases:
+        total += purchase.product.price * purchase.count
+    return render(req, 'store_app/factor.html', {'purchases': purchases, 'total_price': total})
+
 
 
 

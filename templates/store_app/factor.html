@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+
+{% block head %}
+<style>
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+    
+    td, th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+    
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+    </style>
+{% endblock head %}
+    
+
+{% block content %}
+{% if not purchase %}
+    <table class="table">
+        <tr>
+            <th>Product</th>
+            <th>Count</th>
+            <th>One Price</th>
+            <th>Price</th>
+        </tr>
+        {% for purchase in purchases %}
+        <tr>
+            <td>{{ purchase.product.title }}</td>
+            <td>{{ purchase.count }}</td>
+            <td>{{ purchase.product.price|intcomma }} $</td>
+            {% widthratio purchase.product.price 1 purchase.count as price %}
+            <td>  {{ price|intcomma }} $</td>
+
+        </tr>
+        
+        {% endfor %}
+        <tr>
+            {% comment %} <td></td><td></td><td></td> {% endcomment %}
+            <th>total price: {{total_price|intcomma}} $</th>
+        </tr> 
+    </table>
+    <h2><a href="{% url 'store_app:home' %}">Ok</a></h2>
+{% else %}
+    <h1> Your basket is empty </h1>
+{% endif %}
+{% endblock content %}
+
+

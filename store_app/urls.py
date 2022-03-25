@@ -16,4 +16,6 @@ urlpatterns = [
     path('purchases/', views.ShoppingListView.as_view(), name='purchases-view'),
     path('m/<int:pk>/', views.shopping_basket_minus, name='m-view'),
     path('p/<int:pk>/', views.shopping_basket_plus, name='p-view'),
+    path('factor/', views.factor_view, name='factor'),
+
 ]
