@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+
+{% block content %}
+{% for purchase in purchases %}
+    <div class="card">
+
+        <div class="row no-gutters">
+
+            <div class="col-auto">
+                <img src="{{ purchase.product.image.url }}" width="170" class="img-fluid" alt="">
+            </div>
+            <div class="col">
+                <div class="card-block px-2">
+                    <h4 class="card-title">{{ purchase.product.title }}</h4>
+                    <h5 class="card-text">Price: {{ purchase.product.price|intcomma }} $</h5>
+                    <div class="number">
+                        <span style="width:20px;height:20px;background:#f2f2f2;border-radius:4px;
+                            padding:8px 5px 8px 5px;border:1px solid #ddd;text-align: center;"
+                              class="minus"><a style="color:red;text-decoration: None" href="{% url 'store_app:m-view' purchase.id %}">{% if purchase.count == 1 %}delete {% else %}-{% endif %}</a></span>
+                        <input style="border:1px solid #ddd;border-radius:4px;height:34px;width:50px;text-align: center" type="text" value="{{ purchase.count }}"/>
+                        <span class="plus"style="width:20px;height:20px;background:#f2f2f2;border-radius:4px;
+                            padding:8px 5px 8px 5px;border:1px solid #ddd;
+                            text-align: center;"><a style="text-decoration: None" href="{% url 'store_app:p-view' purchase.id %}">+</a></span>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+{% endfor %}
+{% endblock %}
