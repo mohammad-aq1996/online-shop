@@ -36,7 +36,7 @@ class ProductDetailView(DetailView):
         number = request.POST.get('count')
         product.buy(number)
         product.save()
-        if ShoppingBasket.objects.filter(product=product).exists():
+        if ShoppingBasket.objects.filter(product=product, buyyer=request.user).exists():
             t = ShoppingBasket.objects.get(product=product)
             t.count = t.count + int(number)
             t.save()
