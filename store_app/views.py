@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .forms import UserCreateForm
-from django.views.generic import CreateView, ListView
+from django.views.generic import CreateView, ListView, DetailView
 from django.urls import reverse_lazy
 from .models import Product
 
@@ -24,6 +24,10 @@ class SearchView(ProductListView):
         return products
 
 
+class ProductDetailView(DetailView):
+    model = Product
+    context_object_name = 'product'
+    template_name = 'store_app/products-detail.html'
 
 
 
