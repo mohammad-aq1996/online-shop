@@ -48,8 +48,9 @@
             <th>total price: {{total_price|intcomma}} $</th>
         </tr> 
     </table>
-    <h2><a href="{% url 'store_app:home' %}">Ok</a></h2>
-{% else %}
+    <div class="container text-center" style="margin: 20px">
+        <a style="padding-left: 30px; padding-right: 30px;" class="btn btn-primary" href="{% url 'store_app:bank' %}">Pay</a>
+    </div>{% else %}
     <h1> Your basket is empty </h1>
 {% endif %}
 {% endblock content %}

@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+
+{% block content %}
+<div class="container text-center">
+    <a class="btn btn-danger" style="padding: 70px" href="{% url 'store_app:unsuccess' %}">Fail</a>
+    <a class="btn btn-success" style="padding: 70px" href="{% url 'store_app:success' %}">Success</a>
+</div>
+{% endblock %}
