@@ -37,10 +37,10 @@
                         <a class="nav-link active" href="/">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
+                        <a class="nav-link" href="{% url 'store_app:laptop-view' %}">Laptop</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'store_app:product-view' %}">Products</a>
+                        <a class="nav-link" href="{% url 'store_app:mobile-view' %}">Mobile</a>
                     </li>
                     {% if user.is_authenticated %}
 

@@ -11,16 +11,22 @@
     <div class="col-sm-9">
         <br>
         <h3>{{ product.title}}</h3>
-        <p>Price: {{ product.price|intcomma }} $</p>
-        {% if product.available and user.is_authenticated %}
-        <form method='post'>
-            {% csrf_token %}
-            <label> Count: </label>
-            <input type='number' value='count' name='count' min=1 max={{ product.count }}>
-            <p><input style="margin-top: 25px; padding-left:35px; padding-right:35px" type="submit" class="btn btn-primary" value="Buy"></p>
-        </form>
-        {% else %}
-            <h2 style="color:red">Product Finished.</h2>
+        <p style="margin-top: 40px">Price: {{ product.price|intcomma }} $</p>
+
+        {% if user.is_authenticated %}
+            {% if product.available %}
+            <form method='post'>
+                {% csrf_token %}
+                <label style="margin-top: 40px"> Count: </label>
+                <input type='number' value='count' name='count' min=1 max={{ product.count }}>
+                <p style="margin-top: 40px"><input style="margin-top: 25px; padding-left:35px; padding-right:35px" type="submit" class="btn btn-primary" value="Buy"></p>
+            </form>
+
+            {% endif %}
+            {% elif not product.available %}
+             <h2 style="color:red;margin-top: 40px">Product Finished.</h2>
+            {% else %}
+            <p style="margin-top: 40px"> To purchase, please <a href="{% url 'store_app:login-view' %}">login</a> </p>
         {% endif %}
     </div>
 <div class="container" style="margin-top: 25px;">

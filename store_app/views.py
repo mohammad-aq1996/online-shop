@@ -13,29 +13,47 @@ class RegisterView(CreateView):
     template_name = 'register.html'
 
 
-class ProductListView(ListView):
+class LaptopListView(ListView):
     model = Product
+    queryset = model.objects.filter(category__slug__exact='laptop').order_by('-created_at')
     context_object_name = 'products'
     template_name = 'store_app/product-list.html'
-    paginate_by = 8
+    paginate_by = 3
 
 
-class ProductListNewestView(ProductListView):
-    def get_queryset(self):
-        return self.model.objects.all().order_by('-created_at')
+class MobileListView(ListView):
+    model = Product
+    queryset = model.objects.filter(category__slug__exact='mobile').order_by('-created_at')
+    context_object_name = 'products'
+    template_name = 'store_app/mobile-list.html'
+    paginate_by = 3
 
 
-class ProductListCheapestView(ProductListView):
-    def get_queryset(self):
-        return self.model.objects.all().order_by('price')
+class ProductListAvailableView(LaptopListView):
+    queryset = Product.objects.filter(category__slug__exact='laptop', available__exact=True)
 
 
-class ProductListExpensiveView(ProductListView):
-    def get_queryset(self):
-        return self.model.objects.all().order_by('-price')
+class ProductListCheapestView(LaptopListView):
+    queryset = Product.objects.filter(category__slug__exact='laptop', available__exact=True).order_by('price')
 
 
-class SearchView(ProductListView):
+class ProductListExpensiveView(LaptopListView):
+    queryset = Product.objects.filter(category__slug__exact='laptop', available__exact=True).order_by('-price')
+
+
+class MobileListAvailableView(MobileListView):
+    queryset = Product.objects.filter(category__slug__exact='mobile', available__exact=True)
+
+
+class MobileListCheapestView(MobileListView):
+    queryset = Product.objects.filter(category__slug__exact='mobile', available__exact=True).order_by('price')
+
+
+class MobileListExpensiveView(MobileListView):
+    queryset = Product.objects.filter(category__slug__exact='mobile', available__exact=True).order_by('-price')
+
+
+class SearchView(LaptopListView):
     paginate_by = 0
 
     def get_queryset(self):

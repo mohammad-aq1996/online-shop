@@ -10,7 +10,7 @@ urlpatterns = [
     path('login/', auth_view.LoginView.as_view(template_name='login.html'), name='login-view'),
     path('logout/', auth_view.LogoutView.as_view(), name='logout-view'),
     path('register/', views.RegisterView.as_view(), name='register-view'),
-    path('products/', views.ProductListView.as_view(), name='product-view'),
+    path('laptops/', views.LaptopListView.as_view(), name='laptop-view'),
     path('search/', views.SearchView.as_view(), name='search-view'),
     path('product/<int:pk>/', views.ProductDetailView.as_view(), name='detail-view'),
     path('purchases/', views.ShoppingListView.as_view(), name='purchases-view'),
@@ -22,6 +22,11 @@ urlpatterns = [
     path('success/', views.result_success_view, name='success'),
     path('cheapest/', views.ProductListCheapestView.as_view(), name='cheapest-view'),
     path('expensive/', views.ProductListExpensiveView.as_view(), name='expensive-view'),
-    path('newest/', views.ProductListNewestView.as_view(), name='newest-view'),
+    path('available/', views.ProductListAvailableView.as_view(), name='available-view'),
+
+    path('mobiles/', views.MobileListView.as_view(), name='mobile-view'),
+    path('mcheapest/', views.MobileListCheapestView.as_view(), name='mobile-cheapest-view'),
+    path('mexpensive/', views.MobileListExpensiveView.as_view(), name='mobile-expensive-view'),
+    path('mavailable/', views.MobileListAvailableView.as_view(), name='mobile-available-view'),
 
 ]
