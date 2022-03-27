@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Product, Brand, ShoppingBasket, Category
+from .models import Product, Brand, ShoppingBasket, Category, Comment
 
 
 @admin.register(Product)
@@ -22,3 +22,9 @@ class BrandAdmin(admin.ModelAdmin):
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ['title', 'slug']
     prepopulated_fields = {'slug': ['title']}
+
+
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ['product', 'user', 'subject', 'status']
+    list_editable = ['status']

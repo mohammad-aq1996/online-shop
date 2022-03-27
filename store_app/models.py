@@ -69,6 +69,11 @@ class ShoppingBasket(models.Model):
 
 
 class Comment(models.Model):
+    STATUS_CHOICE = [
+        ("publish", "Publish"),
+        ("draft", "Draft")
+    ]
+    status = models.CharField(max_length=7, choices=STATUS_CHOICE, default='draft')
     product = models.ForeignKey(Product, models.CASCADE)
     user = models.ForeignKey(User, models.CASCADE)
     subject = models.CharField(max_length=25)
