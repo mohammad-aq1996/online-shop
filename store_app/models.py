@@ -68,3 +68,29 @@ class ShoppingBasket(models.Model):
         return self.product.title
 
 
+class Comment(models.Model):
+    product = models.ForeignKey(Product, models.CASCADE)
+    user = models.ForeignKey(User, models.CASCADE)
+    subject = models.CharField(max_length=25)
+    message = models.TextField()
+    created_at = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return self.subject
+
+    class Meta:
+        ordering = ['created_at']
+
+
+
+
+
+
+
+
+
+
+
+
+
+
