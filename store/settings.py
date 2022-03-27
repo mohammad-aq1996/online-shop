@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'store_app.apps.StoreAppConfig',
     'django.contrib.humanize',
     'ckeditor',
+    'django_bootstrap5',
 ]
 
 MIDDLEWARE = [
