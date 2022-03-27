@@ -1,9 +1,9 @@
 from django.shortcuts import render
-from .forms import UserCreateForm
+from .forms import UserCreateForm, CommentForm
 from django.views.generic import CreateView, ListView, DetailView, View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
-from .models import Product, ShoppingBasket
+from .models import Product, ShoppingBasket, Comment
 from django.shortcuts import redirect
 
 
@@ -67,19 +67,38 @@ class ProductDetailView(DetailView):
     context_object_name = 'product'
     template_name = 'store_app/products-detail.html'
 
-    def post(self, request, **kwargs):
-        product = Product.objects.get(id=self.kwargs['pk'])
-        number = request.POST.get('count')
-        product.buy(number)
-        product.save()
-        if ShoppingBasket.objects.filter(product=product, buyyer=request.user).exists():
-            t = ShoppingBasket.objects.get(product=product)
-            t.count = t.count + int(number)
-            t.save()
-        else:
-            ShoppingBasket.objects.create(product=product, buyyer=request.user, count=number)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'] = CommentForm
+        context['comments'] = Comment.objects.filter(product_id=self.kwargs['pk'], status__exact='publish')
+        return context
 
-        return redirect('store_app:product-view')
+    def post(self, request, **kwargs):
+        if 'count' in request.POST:
+            print(request.POST)
+            product = Product.objects.get(id=self.kwargs['pk'])
+            number = request.POST.get('count')
+            product.buy(number)
+            product.save()
+            if ShoppingBasket.objects.filter(product=product, buyyer=request.user).exists():
+                t = ShoppingBasket.objects.get(product=product)
+                t.count = t.count + int(number)
+                t.save()
+            else:
+                ShoppingBasket.objects.create(product=product, buyyer=request.user, count=number)
+            return redirect('store_app:purchases-view')
+
+        if 'subject' in request.POST:
+            print(request.POST)
+            form = CommentForm(request.POST)
+            if form.is_valid():
+                subject = form.cleaned_data['subject']
+                message = form.cleaned_data['message']
+                user = request.user
+                product = self.model.objects.get(id=self.kwargs['pk'])
+                comment = Comment(product=product, user=user, subject=subject, message=message)
+                comment.save()
+            return redirect('store_app:detail-view', self.kwargs['pk'])
 
 
 class ShoppingListView(LoginRequiredMixin, ListView):
