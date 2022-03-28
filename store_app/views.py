@@ -136,12 +136,12 @@ class ProductDetailView(DetailView):
             number = request.POST.get('count')
             product.buy(number)
             product.save()
-            if ShoppingBasket.objects.filter(product=product, buyyer=request.user).exists():
+            if ShoppingBasket.objects.filter(product=product, buyer=request.user).exists():
                 t = ShoppingBasket.objects.get(product=product)
                 t.count = t.count + int(number)
                 t.save()
             else:
-                ShoppingBasket.objects.create(product=product, buyyer=request.user, count=number)
+                ShoppingBasket.objects.create(product=product, buyer=request.user, count=number)
             return redirect('store_app:purchases-view')
 
         if 'subject' in request.POST:
@@ -167,7 +167,7 @@ class ShoppingListView(LoginRequiredMixin, ListView):
     context_object_name = 'purchases'
 
     def get_queryset(self):
-        return self.model.objects.filter(buyyer=self.request.user)
+        return self.model.objects.filter(buyer=self.request.user)
 
 
 def shopping_basket_minus(req, pk):
@@ -216,7 +216,7 @@ def factor_view(req):
     """
         It returns specific user purchases and total price of shopping
     """
-    purchases = ShoppingBasket.objects.filter(buyyer=req.user)
+    purchases = ShoppingBasket.objects.filter(buyer=req.user)
     total = 0
     for purchase in purchases:
         total += purchase.product.price * purchase.count
@@ -228,7 +228,7 @@ def result_success_view(req):
         If bank transaction being successful this function will call
         It deleted specific user shopping basket
     """
-    purchases = ShoppingBasket.objects.filter(buyyer=req.user)
+    purchases = ShoppingBasket.objects.filter(buyer=req.user)
     purchases.delete()
     return render(req, 'store_app/success-result.html')
 

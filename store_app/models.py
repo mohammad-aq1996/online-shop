@@ -17,6 +17,13 @@ class Product(models.Model):
     created_at = models.DateTimeField(default=timezone.now)
 
     def buy(self, num):
+        """
+            Parameter:
+                num => number of specific product that a user want to buy
+            If count of product(in database) is greater than num, then count of product minus num
+            If count of product is less than one it means the product isn't available anymore
+
+        """
         if self.count >= int(num):
             self.count = self.count - int(num)
 
@@ -24,17 +31,19 @@ class Product(models.Model):
             self.available = False
 
     def count_minus(self):
+        """
+            If a specific product is available, then it can be reduced
+            If the count of a specific product get zero, then turn available to False
+        """
         if self.count > 0:
             self.count = self.count - 1
         if self.count == 0:
             self.available = False
 
     def count_add(self):
+        # Increase number of specific product in database and turn available to True
         self.count = self.count + 1
         self.available = True
-
-    def get_absolute_url(self):
-        return reverse("product_detail", kwargs={"pk": self.pk})
 
     def __str__(self):
         return self.title
@@ -57,12 +66,12 @@ class Category(models.Model):
 
 
 class ShoppingBasket(models.Model):
-    buyyer = models.ForeignKey(User, models.CASCADE)
+    buyer = models.ForeignKey(User, models.CASCADE)
     product = models.ForeignKey(Product, models.CASCADE, related_name='products')
     count = models.PositiveSmallIntegerField(default=1)
 
     class Meta:
-        ordering = ['buyyer']
+        ordering = ['buyer']
 
     def __str__(self):
         return self.product.title

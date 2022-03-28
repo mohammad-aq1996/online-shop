@@ -9,7 +9,7 @@ class ProductAdmin(admin.ModelAdmin):
 
 @admin.register(ShoppingBasket)
 class ShoppingBasketAdmin(admin.ModelAdmin):
-    list_display = ['product', 'buyyer', 'count']
+    list_display = ['product', 'buyer', 'count']
 
 
 @admin.register(Brand)
