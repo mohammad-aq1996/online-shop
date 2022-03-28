@@ -3,11 +3,25 @@
 {% load humanize %}
 
 {% block content %}
-
     <div class="container">
-        <span> Sort: <a style="text-decoration: None; color:black" href="{% url 'store_app:available-view' %}">Available |</a>
-            <a style="text-decoration: None; color:black" href="{% url 'store_app:cheapest-view' %}">cheapest |</a>
-            <a style="text-decoration: None; color:black" href="{% url 'store_app:expensive-view' %}">Most expensive</a></span>
+        <span>
+            {% if request.path == '/mobiles/' or request.path == '/mcheapest/' or request.path == '/mexpensive/' or request.path == '/mavailable/' %}
+                Sort:
+                <a style="text-decoration: None; color:black" href="{% url 'store_app:mobile-available-view' %}">Available |</a>
+                <a style="text-decoration: None; color:black" href="{% url 'store_app:mobile-cheapest-view' %}">cheapest |</a>
+                <a style="text-decoration: None; color:black" href="{% url 'store_app:mobile-expensive-view' %}">Most expensive</a>
+
+            {% elif request.path == '/laptops/' or request.path == '/cheapest/' or request.path == '/expensive/' or request.path == '/available/' %}
+                Sort:
+                <a style="text-decoration: None; color:black" href="{% url 'store_app:available-view' %}">Available |</a>
+                <a style="text-decoration: None; color:black" href="{% url 'store_app:cheapest-view' %}">cheapest |</a>
+                <a style="text-decoration: None; color:black" href="{% url 'store_app:expensive-view' %}">Most expensive</a></span>
+
+
+
+
+            {% endif %}
+        </span>
         <hr>
     </div>
     <div class="row row-cols-1 row-cols-md-4 g-4">
