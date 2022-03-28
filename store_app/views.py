@@ -13,43 +13,42 @@ class RegisterView(CreateView):
     template_name = 'register.html'
 
 
-class LaptopListView(ListView):
+class ProductListView(ListView):
     model = Product
-    queryset = model.objects.filter(category__slug__exact='laptop').order_by('-created_at')
     context_object_name = 'products'
     template_name = 'store_app/product-list.html'
     paginate_by = 12
 
 
-class MobileListView(ListView):
-    model = Product
-    queryset = model.objects.filter(category__slug__exact='mobile').order_by('-created_at')
-    context_object_name = 'products'
-    template_name = 'store_app/mobile-list.html'
-    paginate_by = 12
+class LaptopListView(ProductListView):
+    queryset = Product.objects.filter(category__slug__exact='laptop').order_by('-created_at')
 
 
-class ProductListAvailableView(LaptopListView):
+class MobileListView(ProductListView):
+    queryset = Product.objects.filter(category__slug__exact='mobile').order_by('-created_at')
+
+
+class LaptopListAvailableView(ProductListView):
     queryset = Product.objects.filter(category__slug__exact='laptop', available__exact=True)
 
 
-class ProductListCheapestView(LaptopListView):
+class LaptopListCheapestView(ProductListView):
     queryset = Product.objects.filter(category__slug__exact='laptop', available__exact=True).order_by('price')
 
 
-class ProductListExpensiveView(LaptopListView):
+class LaptopListExpensiveView(ProductListView):
     queryset = Product.objects.filter(category__slug__exact='laptop', available__exact=True).order_by('-price')
 
 
-class MobileListAvailableView(MobileListView):
+class MobileListAvailableView(ProductListView):
     queryset = Product.objects.filter(category__slug__exact='mobile', available__exact=True)
 
 
-class MobileListCheapestView(MobileListView):
+class MobileListCheapestView(ProductListView):
     queryset = Product.objects.filter(category__slug__exact='mobile', available__exact=True).order_by('price')
 
 
-class MobileListExpensiveView(MobileListView):
+class MobileListExpensiveView(ProductListView):
     queryset = Product.objects.filter(category__slug__exact='mobile', available__exact=True).order_by('-price')
 
 
