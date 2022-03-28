@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .forms import UserCreateForm, CommentForm
-from django.views.generic import CreateView, ListView, DetailView, View
+from django.views.generic import CreateView, ListView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from .models import Product, ShoppingBasket, Comment
@@ -8,12 +8,20 @@ from django.shortcuts import redirect
 
 
 class RegisterView(CreateView):
+    """
+        Signup view with the use of Django built-in signup view
+        After signing up successfully user will automatically redirect to the login page
+    """
     form_class = UserCreateForm
     success_url = reverse_lazy('store_app:login-view')
     template_name = 'register.html'
 
 
 class ProductListView(ListView):
+    """
+        Base class for product views
+        On every page user will see 2 objects of products list
+    """
     model = Product
     context_object_name = 'products'
     template_name = 'store_app/product-list.html'
@@ -21,38 +29,75 @@ class ProductListView(ListView):
 
 
 class LaptopListView(ProductListView):
+    """
+        This class inherit from ProductListView class
+        It returns laptop products descending
+    """
     queryset = Product.objects.filter(category__slug__exact='laptop').order_by('-created_at')
 
 
 class MobileListView(ProductListView):
+    """
+        This class inherit from ProductListView class
+        It returns mobile products descending
+    """
     queryset = Product.objects.filter(category__slug__exact='mobile').order_by('-created_at')
 
 
 class LaptopListAvailableView(ProductListView):
+    """
+        This class inherit from ProductListView class
+        It returns only available laptops
+    """
     queryset = Product.objects.filter(category__slug__exact='laptop', available__exact=True)
 
 
 class LaptopListCheapestView(ProductListView):
+    """
+        This class inherit from ProductListView class
+        It returns laptops ranging from the cheapest to the most expensive
+    """
     queryset = Product.objects.filter(category__slug__exact='laptop', available__exact=True).order_by('price')
 
 
 class LaptopListExpensiveView(ProductListView):
+    """
+        This class inherit from ProductListView class
+        It returns laptops ranging from the most expensive to cheapest
+    """
     queryset = Product.objects.filter(category__slug__exact='laptop', available__exact=True).order_by('-price')
 
 
 class MobileListAvailableView(ProductListView):
+    """
+        This class inherit from ProductListView class
+        It returns only available mobiles
+    """
     queryset = Product.objects.filter(category__slug__exact='mobile', available__exact=True)
 
 
 class MobileListCheapestView(ProductListView):
+    """
+        This class inherit from ProductListView class
+        It returns mobiles ranging from the cheapest to the most expensive
+    """
     queryset = Product.objects.filter(category__slug__exact='mobile', available__exact=True).order_by('price')
 
 
 class MobileListExpensiveView(ProductListView):
+    """
+        This class inherit from ProductListView class
+        It returns mobiles ranging from the most expensive to cheapest
+    """
     queryset = Product.objects.filter(category__slug__exact='mobile', available__exact=True).order_by('-price')
 
 
 class SearchView(LaptopListView):
+    """
+        This page inherits from 'LaptopListView' class
+        Get information about search box and return posts whose titles contain search box information
+        Also, there is no pagination and all posts appear on one page
+    """
     paginate_by = 0
 
     def get_queryset(self):
@@ -62,19 +107,31 @@ class SearchView(LaptopListView):
 
 
 class ProductDetailView(DetailView):
+    """
+        Details about a particular product
+        Logged in users can add product to their shopping basket and leave a comment about the product
+    """
     model = Product
     context_object_name = 'product'
     template_name = 'store_app/products-detail.html'
 
     def get_context_data(self, **kwargs):
+        """
+            It returns comment form and published comments for specific product
+        """
         context = super().get_context_data(**kwargs)
         context['form'] = CommentForm
         context['comments'] = Comment.objects.filter(product_id=self.kwargs['pk'], status__exact='publish')
         return context
 
     def post(self, request, **kwargs):
+        """
+            The user specifies the number of products and clicks on the 'Buy' button, the product will add to the user's
+            shopping basket and the number of that product will be reduced from the database. If a product exists in
+            the shopping basket and the user decide to click again on the buy button it will add to the number of
+            that product in the user's shopping basket
+        """
         if 'count' in request.POST:
-            print(request.POST)
             product = Product.objects.get(id=self.kwargs['pk'])
             number = request.POST.get('count')
             product.buy(number)
@@ -88,7 +145,7 @@ class ProductDetailView(DetailView):
             return redirect('store_app:purchases-view')
 
         if 'subject' in request.POST:
-            print(request.POST)
+            # If user submit a comment, and if it was valid, it will save in database
             form = CommentForm(request.POST)
             if form.is_valid():
                 subject = form.cleaned_data['subject']
@@ -101,6 +158,10 @@ class ProductDetailView(DetailView):
 
 
 class ShoppingListView(LoginRequiredMixin, ListView):
+    """
+        For access to this view user must be logged in
+        This class return user's purchases list
+    """
     model = ShoppingBasket
     template_name = 'store_app/shopping-list.html'
     context_object_name = 'purchases'
@@ -110,6 +171,16 @@ class ShoppingListView(LoginRequiredMixin, ListView):
 
 
 def shopping_basket_minus(req, pk):
+    """
+        After a particular user added a product to her/him shopping basket, he/she can reduce or increase the number of
+        that product on her/him shopping basket. When a user decides to reduce the number of specific products on
+        her/him shopping basket, He / She click on the '-' link. After clicking on '-', this function will be called.
+        This function reduces the number of that specific product in the shopping basket. Then the number of that
+        specific product in the database will be increased.
+        If a user has one specific product of products he/she will see 'delete' link instead of '-' link.After clicking
+        on 'delete', the specific product will be removed from the shopping basket, and increase number of that product
+        in the database
+    """
     purchase = ShoppingBasket.objects.get(id=pk)
     current_product = Product.objects.get(id=purchase.product.id)
     if purchase.count > 1:
@@ -124,6 +195,13 @@ def shopping_basket_minus(req, pk):
 
 
 def shopping_basket_plus(req, pk):
+    """
+        After a particular user added a product to her/him shopping basket, he/she can reduce or increase the number of
+        that product on her/him shopping basket. When a user decides to increase the number of specific products on
+        her/him shopping basket, He / She click on the '+' link. After clicking on '+', this function will be called.
+        This function increases the number of that specific product in the shopping basket. Then the number of that
+        specific product in the database will be reduces.
+    """
     purchase = ShoppingBasket.objects.get(id=pk)
     current_product = Product.objects.get(id=purchase.product.id)
     if current_product.count > 0:
@@ -135,6 +213,9 @@ def shopping_basket_plus(req, pk):
 
 
 def factor_view(req):
+    """
+        It returns specific user purchases and total price of shopping
+    """
     purchases = ShoppingBasket.objects.filter(buyyer=req.user)
     total = 0
     for purchase in purchases:
@@ -143,6 +224,10 @@ def factor_view(req):
 
 
 def result_success_view(req):
+    """
+        If bank transaction being successful this function will call
+        It deleted specific user shopping basket
+    """
     purchases = ShoppingBasket.objects.filter(buyyer=req.user)
     purchases.delete()
     return render(req, 'store_app/success-result.html')
