@@ -17,8 +17,11 @@
                 <img src="{{ product.image.url }}" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5>{{product.title}}</h5>
-                    {% if not product.available %}<p style="color:red"> Not available </p>{% endif %}
-                    <p>price: {{product.price|intcomma }} $</p>
+                    {% if product.available %}
+                        <p>price: {{product.price|intcomma }} $</p>
+                    {% else %}
+                        <p style="color:red"> Not available </p>
+                    {% endif %}
                     <a href="{% url 'store_app:detail-view' product.id %}" class="btn btn-primary">Buy</a>
                 </div>
             </div>
