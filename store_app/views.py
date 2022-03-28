@@ -18,7 +18,7 @@ class LaptopListView(ListView):
     queryset = model.objects.filter(category__slug__exact='laptop').order_by('-created_at')
     context_object_name = 'products'
     template_name = 'store_app/product-list.html'
-    paginate_by = 3
+    paginate_by = 12
 
 
 class MobileListView(ListView):
@@ -26,7 +26,7 @@ class MobileListView(ListView):
     queryset = model.objects.filter(category__slug__exact='mobile').order_by('-created_at')
     context_object_name = 'products'
     template_name = 'store_app/mobile-list.html'
-    paginate_by = 3
+    paginate_by = 12
 
 
 class ProductListAvailableView(LaptopListView):
