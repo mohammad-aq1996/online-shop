@@ -1,3 +1,7 @@
+# پروژه فروشگاه آنلاین
+پروژه فوق در هاست رایگان سایت python any where آپلود شده است که از طریق لینک زیر میتواند پروژه را مشاهده نمایید:
+[https://mohammadaq.pythonanywhere.com/](https://https://mohammadaq.pythonanywhere.com/)
+## منوی Nav Bar
 منوی Nav Bar شامل ۶ گزینه میباشد:
 الف) خانه: صفحه اصلی سایت
  ب) لپ تاپ: لیست همه محصولات دسته بندی لپ تاپ
