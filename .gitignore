@@ -1,0 +1,7 @@
+db.sqlite3
+
+store_app/migrations
+
+api/migrations
+
+.env

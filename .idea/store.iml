@@ -47,6 +47,7 @@
       <excludeFolder url="file://$MODULE_DIR$/.env/include" />
       <excludeFolder url="file://$MODULE_DIR$/.env/share" />
     </content>
+    <orderEntry type="jdk" jdkName="Python 3.9 (store) (2)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
   <component name="PyDocumentationSettings">

@@ -1,0 +1,41 @@
+version: "3.9"
+
+services:
+  app:
+    build: .
+    container_name: app
+    restart: always
+    expose:
+      - "8000"
+    volumes:
+      - ./online_shop:/usr/src/app
+    depends_on:
+      - db
+
+  db:
+    image: postgres:14.2
+    container_name: postgresql
+    volumes:
+      - storedb:/var/lib/postgresql/data
+    restart: always
+    expose:
+      - "5432"
+    environment:
+      - POSTGRES_DB=postgresql
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+
+  nginx:
+    build: ./nginx
+    container_name: nginx
+    restart: always
+    ports:
+      - "80:80"
+    volumes:
+      - ./online_shop/media:/usr/src/app/media
+      - ./online_shop/static:/usr/src/app/static
+      - ./online_shop/templates:/usr/src/app/templates
+    depends_on:
+      - db
+volumes:
+  storedb:
