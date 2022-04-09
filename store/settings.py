@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'ckeditor',
     'django_bootstrap5',
     'api.apps.ApiConfig',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
