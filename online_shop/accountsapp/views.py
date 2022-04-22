@@ -14,5 +14,5 @@ class RegisterView(CreateView):
     template_name = 'accountapp/register.html'
 
 
-# class PassChangeView(PasswordChangeView):
-#     success_url = reverse_lazy('account:pass-change-done')
+class PassChangeView(PasswordChangeView):
+    success_url = reverse_lazy('accountapp:pass-change-done')
