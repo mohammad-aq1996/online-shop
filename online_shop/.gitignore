@@ -7,3 +7,5 @@ account/migrations
 store_app/migrations
 
 api/migrations
+
+../.idea
