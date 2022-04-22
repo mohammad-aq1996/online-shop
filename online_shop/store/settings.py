@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django_bootstrap5',
     'api.apps.ApiConfig',
     'rest_framework',
+    'account.apps.AccountConfig',
 ]
 
 MIDDLEWARE = [
@@ -79,11 +80,13 @@ WSGI_APPLICATION = 'store.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'postgresql',
+        'NAME': 'postgres',
         'USER': 'postgres',
         'PASSWORD': 'postgres',
-        'HOST': 'db',
-        #'PORT': '5432',
+        # db
+        'HOST': 'localhost',
+        #
+        'PORT': '5432',
     }
 }
 
