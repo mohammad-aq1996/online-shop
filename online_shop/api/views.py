@@ -4,6 +4,8 @@ from rest_framework import permissions
 from store_app.models import Product
 from .serializers import ProductSerializer
 
+from dj_rest_auth.views import PasswordResetConfirmView
+
 
 class LaptopListAPIView(APIView):
     """
@@ -68,6 +70,12 @@ class ProductSaveAPIView(APIView):
         return Response('Not valid')
 
 
+class PassResetConfirmView(PasswordResetConfirmView):
+    """
+        For preventing conflict between account reset password confirm and api reset confirm view, we have to override
+         this view
+    """
+    success_url = 'password_reset_complete'
 
 
 

@@ -16,3 +16,5 @@ class RegisterView(CreateView):
 
 class PassChangeView(PasswordChangeView):
     success_url = reverse_lazy('accountapp:pass-change-done')
+
+
