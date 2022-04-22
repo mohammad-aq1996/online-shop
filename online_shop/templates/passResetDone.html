@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+{% block content %}
+
+    <h2> Your Password changed successfully.</h2>
+    <p> Go to <a href="{% url 'account:login-view' %}">login</a>  page.</p>
+
+{% endblock %}

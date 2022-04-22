@@ -3,6 +3,7 @@ from .forms import UserCreateForm
 from django.urls import reverse_lazy
 from django.contrib.auth.views import PasswordChangeView
 
+
 class RegisterView(CreateView):
     """
         Signup view with the use of Django built-in signup view
@@ -15,4 +16,8 @@ class RegisterView(CreateView):
 
 class PassChangeView(PasswordChangeView):
     success_url = reverse_lazy('account:pass-change-done')
+
+
+
+
 
