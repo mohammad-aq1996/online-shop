@@ -211,5 +211,42 @@ CKEDITOR_CONFIGS = {
     }
 }
 
+# Abstract User
 
 AUTH_USER_MODEL = 'account.User'
+
+
+# Email
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
