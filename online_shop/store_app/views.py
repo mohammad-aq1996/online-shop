@@ -1,26 +1,15 @@
 from django.shortcuts import render
-from .forms import UserCreateForm, CommentForm
+from .forms import CommentForm
 from django.views.generic import CreateView, ListView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.urls import reverse_lazy
 from .models import Product, ShoppingBasket, Comment
 from django.shortcuts import redirect
-
-
-class RegisterView(CreateView):
-    """
-        Signup view with the use of Django built-in signup view
-        After signing up successfully user will automatically redirect to the login page
-    """
-    form_class = UserCreateForm
-    success_url = reverse_lazy('store_app:login-view')
-    template_name = 'register.html'
 
 
 class ProductListView(ListView):
     """
         Base class for product views
-        On every page user will see 2 objects of products list
+        On every page user will see 12 objects of products list
     """
     model = Product
     context_object_name = 'products'
