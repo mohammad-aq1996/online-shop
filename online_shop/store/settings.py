@@ -42,7 +42,15 @@ INSTALLED_APPS = [
     'api.apps.ApiConfig',
     'accountsapp.apps.AccountsappConfig',
     'rest_framework',
+    'rest_framework.authtoken',
+    'dj_rest_auth',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'dj_rest_auth.registration',
 ]
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -219,3 +227,10 @@ CKEDITOR_CONFIGS = {
 AUTH_USER_MODEL = 'accountsapp.User'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication'
+    ]
+}
