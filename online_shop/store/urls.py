@@ -17,12 +17,32 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib.auth import views as auth_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('store_app.urls')),
     path('api/', include('api.urls')),
     path('account/', include('accountsapp.urls')),
+
+    path("password_reset/", auth_view.PasswordResetView.as_view(template_name='accountapp/passReset.html'),
+         name="password_reset"),
+    path(
+        "password_reset/done/",
+        auth_view.PasswordResetDoneView.as_view(template_name='accountapp/passResetSend.html'),
+        name="password_reset_done",
+    ),
+    path(
+        "reset/<uidb64>/<token>/",
+        auth_view.PasswordResetConfirmView.as_view(template_name='accountapp/passResetConf.html'),
+        name="password_reset_confirm",
+    ),
+    path(
+        "reset/done/",
+        auth_view.PasswordResetCompleteView.as_view(template_name='accountapp/passResetDone.html'),
+        name="password_reset_complete",
+    ),
 ]
+
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
