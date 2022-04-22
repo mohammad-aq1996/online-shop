@@ -14,7 +14,7 @@ class RegisterView(CreateView):
     """
     form_class = UserCreateForm
     success_url = reverse_lazy('store_app:login-view')
-    template_name = 'register.html'
+    template_name = 'accountapp/register.html'
 
 
 class ProductListView(ListView):

@@ -27,7 +27,7 @@
             {% elif not product.available %}
              <h2 style="color:red;margin-top: 40px">Product Finished.</h2>
             {% else %}
-            <p style="margin-top: 40px"> To purchase, please <a href="{% url 'store_app:login-view' %}">login</a> </p>
+            <p style="margin-top: 40px"> To purchase, please <a href="{% url 'accountapp:login-view' %}">login</a> </p>
         {% endif %}
     </div>
     <div class="container" style="margin-top: 25px;">
