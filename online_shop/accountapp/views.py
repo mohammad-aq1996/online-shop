@@ -10,12 +10,12 @@ class RegisterView(CreateView):
         After signing up successfully user will automatically redirect to the login page
     """
     form_class = UserCreateForm
-    success_url = reverse_lazy('account:login-view')
+    success_url = reverse_lazy('accountapp:login-view')
     template_name = 'register.html'
 
 
 class PassChangeView(PasswordChangeView):
-    success_url = reverse_lazy('account:pass-change-done')
+    success_url = reverse_lazy('accountapp:pass-change-done')
 
 
 
