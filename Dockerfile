@@ -8,9 +8,14 @@ WORKDIR /usr/src/app
 
 COPY ./requirements.txt .
 RUN pip install --upgrade pip
+# solve cffi problem
+RUN apk add --update --no-cache --virtual .tmp-build-deps \
+    gcc libc-dev linux-headers \
+    && apk add libffi-dev
 RUN pip install -r requirements.txt
 
-CMD python manage.py makemigrations --noinput && \
+CMD sleep 10 && \
+    python manage.py makemigrations --noinput && \
     python manage.py migrate --noinput && \
 #    python manage.py collectstatic --noinput &&\
     python manage.py createsuperuser --user admin --email admin@example.com --noinput ; \
