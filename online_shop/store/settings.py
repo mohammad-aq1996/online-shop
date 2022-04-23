@@ -41,7 +41,9 @@ INSTALLED_APPS = [
     'django_bootstrap5',
     'api.apps.ApiConfig',
     'rest_framework',
-    'account.apps.AccountConfig',
+    'accountapp.apps.AccountConfig',
+
+
 ]
 
 MIDDLEWARE = [
@@ -213,7 +215,7 @@ CKEDITOR_CONFIGS = {
 
 # Abstract User
 
-AUTH_USER_MODEL = 'account.User'
+AUTH_USER_MODEL = 'accountapp.User'
 
 
 # Email

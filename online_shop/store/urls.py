@@ -18,13 +18,13 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_view
-from account import views
+from accountapp import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('store_app.urls')),
     path('api/', include('api.urls')),
-    path('account/', include('account.urls')),
+    path('accountapp/', include('accountapp.urls')),
 
     path("password_reset/", auth_view.PasswordResetView.as_view(template_name='passReset.html'), name="password_reset"),
     path(

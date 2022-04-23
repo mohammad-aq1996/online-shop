@@ -1,5 +1,5 @@
 from django.db import models
-from account.models import User
+from accountapp.models import User
 from django.urls import reverse
 from django.utils import timezone
 from ckeditor.fields import RichTextField
