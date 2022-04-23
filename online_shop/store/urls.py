@@ -19,6 +19,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_view
 from accountapp import views
+from api.views import PassResetConfirmView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -42,6 +43,10 @@ urlpatterns = [
         auth_view.PasswordResetCompleteView.as_view(template_name='passResetDone.html'),
         name="password_reset_complete",
     ),
+    path('api/rest-auth/password/reset/confirm/<uidb64>/<token>/',
+         PassResetConfirmView.as_view(),
+         name='password_reset_confirm')
+
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
