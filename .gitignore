@@ -5,3 +5,9 @@ store_app/migrations
 api/migrations
 
 .env
+
+online_shop/accountapp/migrations
+
+online_shop/store_app/migrations
+
+online_shop/db.sqlite3
