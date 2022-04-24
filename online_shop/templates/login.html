@@ -5,7 +5,7 @@
     <form method="post">
         {% csrf_token %}
         {% bootstrap_form form %}
-        <p><a href="{% url 'password_reset' %}">Forget Password</a> </p>
+        <p><a href="{% url 'accountapp:password_reset' %}">Forget Password</a> </p>
         <input type="submit" class="btn btn-primary" value="Login">
     </form>
 

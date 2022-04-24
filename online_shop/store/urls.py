@@ -27,25 +27,8 @@ urlpatterns = [
     path('api/', include('api.urls')),
     path('accountapp/', include('accountapp.urls')),
 
-    path("password_reset/", auth_view.PasswordResetView.as_view(template_name='passReset.html'), name="password_reset"),
-    path(
-        "password_reset/done/",
-        auth_view.PasswordResetDoneView.as_view(template_name='passResetSent.html'),
-        name="password_reset_done",
-    ),
-    path(
-        "reset/<uidb64>/<token>/",
-        auth_view.PasswordResetConfirmView.as_view(template_name='passResetConf.html'),
-        name="password_reset_confirm",
-    ),
-    path(
-        "reset/done/",
-        auth_view.PasswordResetCompleteView.as_view(template_name='passResetDone.html'),
-        name="password_reset_complete",
-    ),
-    path('api/rest-auth/password/reset/confirm/<uidb64>/<token>/',
-         PassResetConfirmView.as_view(),
-         name='password_reset_confirm')
+
+
 
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

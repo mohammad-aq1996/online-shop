@@ -6,5 +6,9 @@ urlpatterns = [
     path('product/detail/<int:pk>/', ProductRetrieveUpdateDeleteAPIView.as_view()),
 
     path('dj-rest-auth/', include('dj_rest_auth.urls')),
-    path('dj-rest-auth/registration/', include('dj_rest_auth.registration.urls'))
+    path('dj-rest-auth/registration/', include('dj_rest_auth.registration.urls')),
+
+    path('api/rest-auth/password/reset/confirm/<uidb64>/<token>/',
+         PassResetConfirmView.as_view(),
+         name='password_reset_confirm')
 ]
