@@ -7,7 +7,16 @@
 w3schools.com
 قرار داده شده و بصورت رایگان در دستسرس عموم قرار دارد، استفاده کرده ام.   
 پروژه فوق در هاست رایگان سایت python any where آپلود شده است که از طریق لینک مقابل میتواند پروژه را مشاهده نمایید:
-[https://mohammadaq.pythonanywhere.com/](https://mohammadaq.pythonanywhere.com)
+[https://mohammadaq.pythonanywhere.com/](https://mohammadaq.pythonanywhere.com)  
+## گزارش پروژه   
+در این پروژه سه 
+web application 
+ برای انجام سه تسک ساخته شده است.   
+ الف) 
+ accountapp:
+  در این اپلیکیشن مدل 
+  AbstractUser 
+ برای افزودن دو فیلد آدرس و تلفن همراه توسعه داده شده است.
 ## منوی Nav Bar
 منوی Nav Bar شامل ۶ گزینه میباشد:  
 * خانه: صفحه اصلی سایت  
