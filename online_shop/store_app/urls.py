@@ -17,13 +17,5 @@ urlpatterns = [
     path('bank/', TemplateView.as_view(template_name='store_app/bank.html'), name='bank'),
     path('uns/', TemplateView.as_view(template_name='store_app/unsuccess-result.html'), name='unsuccess'),
     path('success/', views.result_success_view, name='success'),
-    path('cheapest/', views.LaptopListCheapestView.as_view(), name='cheapest-view'),
-    path('expensive/', views.LaptopListExpensiveView.as_view(), name='expensive-view'),
-    path('available/', views.LaptopListAvailableView.as_view(), name='available-view'),
-
     path('mobiles/', views.MobileListView.as_view(), name='mobile-view'),
-    path('mcheapest/', views.MobileListCheapestView.as_view(), name='mobile-cheapest-view'),
-    path('mexpensive/', views.MobileListExpensiveView.as_view(), name='mobile-expensive-view'),
-    path('mavailable/', views.MobileListAvailableView.as_view(), name='mobile-available-view'),
-
 ]
