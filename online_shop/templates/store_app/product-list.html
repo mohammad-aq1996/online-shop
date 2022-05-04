@@ -3,7 +3,7 @@
 {% load humanize %}
 
 {% block content %}
-    <div class="container">
+    <!-- div class="container">
         <span>
             {% if request.path == '/mobiles/' or request.path == '/mcheapest/' or request.path == '/mexpensive/' or request.path == '/mavailable/' %}
                 Sort:
@@ -23,7 +23,7 @@
             {% endif %}
         </span>
         <hr>
-    </div>
+    </div -->
     <div class="row row-cols-1 row-cols-md-4 g-4">
         {% for product in products %}
         <div class="col">
