@@ -33,54 +33,6 @@ class MobileListView(ProductListView):
     queryset = Product.objects.filter(category__slug__exact='mobile').order_by('-created_at')
 
 
-class LaptopListAvailableView(ProductListView):
-    """
-        This class inherit from ProductListView class
-        It returns only available laptops
-    """
-    queryset = Product.objects.filter(category__slug__exact='laptop', available__exact=True)
-
-
-class LaptopListCheapestView(ProductListView):
-    """
-        This class inherit from ProductListView class
-        It returns laptops ranging from the cheapest to the most expensive
-    """
-    queryset = Product.objects.filter(category__slug__exact='laptop', available__exact=True).order_by('price')
-
-
-class LaptopListExpensiveView(ProductListView):
-    """
-        This class inherit from ProductListView class
-        It returns laptops ranging from the most expensive to cheapest
-    """
-    queryset = Product.objects.filter(category__slug__exact='laptop', available__exact=True).order_by('-price')
-
-
-class MobileListAvailableView(ProductListView):
-    """
-        This class inherit from ProductListView class
-        It returns only available mobiles
-    """
-    queryset = Product.objects.filter(category__slug__exact='mobile', available__exact=True)
-
-
-class MobileListCheapestView(ProductListView):
-    """
-        This class inherit from ProductListView class
-        It returns mobiles ranging from the cheapest to the most expensive
-    """
-    queryset = Product.objects.filter(category__slug__exact='mobile', available__exact=True).order_by('price')
-
-
-class MobileListExpensiveView(ProductListView):
-    """
-        This class inherit from ProductListView class
-        It returns mobiles ranging from the most expensive to cheapest
-    """
-    queryset = Product.objects.filter(category__slug__exact='mobile', available__exact=True).order_by('-price')
-
-
 class SearchView(LaptopListView):
     """
         This page inherits from 'LaptopListView' class
